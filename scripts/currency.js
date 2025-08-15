@@ -4,7 +4,13 @@ const denominations = new Map([
     ["Broam", 4]
 ]);
 
-export function getCurrenciesManual() {
+const sphereCompendiums = ["cosmere-rpg-stormlight-handbook.items", "cosmere-rpg.items"];
+
+export default async function getCurrency() {
+    return await getCompendiumSpheres() ?? getManualSpheres();
+}
+
+function getManualSpheres() {
     const toItems = (gems, baseValue) => {
         const items = [];
         for(const gem of gems) {
@@ -54,4 +60,32 @@ export function getCurrenciesManual() {
     currencies.find(value => value.name === "Diamond Mark").primary = true;
 
     return currencies;
+}
+
+async function getCompendiumSpheres() {
+    for(const compendium of sphereCompendiums) {
+        const pack = game.packs.get(compendium);
+        if(!pack) continue;
+
+        const spheres = pack._getVisibleTreeContents().filter(x => x.type === "loot");
+
+        const currencies = []
+        for(const sphere of spheres) {
+
+            const itemData = await fromUuid(sphere.uuid);
+            if(!itemData.system.isMoney) continue;
+
+            currencies.push({
+                type: "item",
+                name: sphere.name,
+                img: sphere.img,
+                abbreviation: "{#}mk",
+                data: { uuid:  sphere.uuid },
+                primary: Boolean(sphere.name === "Diamond Mark"),
+                exchangeRate: itemData.system.price.value,
+            });
+        }
+        if(currencies.length > 0) return currencies;
+    }
+    return null;
 }
