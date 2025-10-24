@@ -7,8 +7,7 @@
   "manifestPlusVersion": "1.2.0",
   "compatibility": {
     "minimum": 12,
-    "verified": 12,
-    "maximum": 12
+    "verified": 12
   },
   "authors": [
     {
@@ -23,7 +22,8 @@
         "id": "cosmere-rpg",
         "type": "system",
         "compatibility": {
-          "verified": "1.0.0"
+          "minimum": "1.0.0",
+          "verified": "2.0.0"
         }
       }
     ],
