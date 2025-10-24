@@ -1,5 +1,5 @@
-![Foundry v12](https://img.shields.io/badge/foundry-v12-green)
-![Cosmere RPG](https://img.shields.io/badge/cosmere%E2%80%93rpg-v1.0.0-green)
+![Foundry v13](https://img.shields.io/badge/foundry-v13-green)
+![Cosmere RPG](https://img.shields.io/badge/cosmere%E2%80%93rpg-v2.0.0-green)
 <!--- Downloads @ Latest Badge -->
 <!--- replace <user>/<repo> with your username/repository -->
 <!--- ![Latest Release Download Count](https://img.shields.io/github/downloads/<user>/<repo>/latest/module.zip) -->
