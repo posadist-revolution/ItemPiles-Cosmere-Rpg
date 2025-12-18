@@ -59,7 +59,17 @@ function getManualSpheres() {
 
     currencies.find(value => value.name === "Diamond Mark").primary = true;
 
-    return currencies;
+    currencies.sort(function(a, b) {
+        if (a.name < b.name) {
+            return -1;
+        }
+        if (a.name > b.name) {
+            return 1;
+        }
+        return 0;
+    });
+
+    return currencies.sort((a, b) => b.exchangeRate - a.exchangeRate);
 }
 
 async function getCompendiumSpheres() {
@@ -85,7 +95,16 @@ async function getCompendiumSpheres() {
                 exchangeRate: itemData.system.price.value,
             });
         }
-        if(currencies.length > 0) return currencies;
+        currencies.sort(function(a, b) {
+            if (a.name < b.name) {
+                return -1;
+            }
+            if (a.name > b.name) {
+                return 1;
+            }
+            return 0;
+        });
+        if(currencies.length > 0) return currencies.sort((a, b) => b.exchangeRate - a.exchangeRate);
     }
     return null;
 }
